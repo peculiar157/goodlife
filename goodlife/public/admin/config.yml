@@ -7,7 +7,9 @@ backend:
 
 # This makes images you upload through the editor land in the right
 # folder automatically, matching how the site expects them.
-media_folder: "public/images/posts"
+# Paths below include the "goodlife/" prefix because the actual project
+# files live one folder deep inside the peculiar157/goodlife repo.
+media_folder: "goodlife/public/images/posts"
 public_folder: "/images/posts"
 
 publish_mode: simple
@@ -15,7 +17,7 @@ publish_mode: simple
 collections:
   - name: "posts"
     label: "Blog Posts"
-    folder: "content/posts"
+    folder: "goodlife/content/posts"
     create: true
     delete: true
     slug: "{{slug}}"
