@@ -2,7 +2,7 @@ backend:
   name: github
   repo: peculiar157/goodlife
   branch: main
-  base_url: https://goodlifehq.vercel.app
+  base_url: https://goodlifeblog.vercel.app
   auth_endpoint: api/auth
 
 # This makes images you upload through the editor land in the right
