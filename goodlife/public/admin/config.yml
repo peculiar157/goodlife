@@ -1,0 +1,46 @@
+backend:
+  name: github
+  repo: peculiar157/goodlife
+  branch: main
+  base_url: https://goodlifehq.vercel.app
+  auth_endpoint: api/auth
+
+# This makes images you upload through the editor land in the right
+# folder automatically, matching how the site expects them.
+media_folder: "public/images/posts"
+public_folder: "/images/posts"
+
+publish_mode: simple
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "content/posts"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: "md"
+    summary: "{{title}} — {{category}}"
+    sortable_fields: ["publishDate", "title", "category"]
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "Must match the filename. Lowercase, hyphens instead of spaces. Changing this after publishing will break the post's existing URL." }
+      - { label: "Meta Description", name: "metaDescription", widget: "text", hint: "17-20 words, used for Google search results. Include the focus keyword naturally." }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Self & Mindfulness", value: "self-mindfulness" }
+          - { label: "Quotes", value: "quotes" }
+          - { label: "Zodiac & Horoscope", value: "zodiac" }
+          - { label: "Coloring Pages", value: "coloring-pages" }
+          - { label: "Printables & Planners", value: "printables-planners" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image", media_library: { config: { multiple: false } }, hint: "Recommended: 1200x800px or larger, JPG or WebP, under 300KB." }
+      - { label: "Featured Image Alt Text", name: "featuredImageAlt", widget: "string", hint: "Describe the image for accessibility and SEO. Be specific." }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Updated Date", name: "updatedDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Only fill this in if you're revising a post after it's already been published." }
+      - { label: "Focus Keyword", name: "focusKeyword", widget: "string", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false, hint: "One sentence shown on home/category page cards. If left blank, the meta description is used instead." }
+      - { label: "Downloadable File", name: "downloadFile", widget: "file", required: false, media_library: { config: { multiple: false } }, hint: "Only for coloring pages / printables. Upload the PDF here, or leave blank if this post has no download." }
+      - { label: "Download Button Label", name: "downloadLabel", widget: "string", required: false, hint: "e.g. 'Download the mandala coloring pages (PDF)'. Only needed if a Downloadable File is set above." }
+      - { label: "Body", name: "body", widget: "markdown" }

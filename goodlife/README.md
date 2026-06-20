@@ -96,6 +96,47 @@ The newsletter form is fully wired to MailerLite's API, it just needs your crede
 
 Until these are set, the form still works visually and won't error, it just logs the email instead of sending it anywhere.
 
+## Setting Up the Admin Editor (`/admin`)
+
+This site includes a visual content editor at `yoursite.vercel.app/admin`, built with [Decap CMS](https://decapcms.org). It lets you create and edit blog posts through a normal web form (no Markdown, no code editor), upload images, and publish, all of which commits directly to this GitHub repo behind the scenes. Vercel then auto-deploys the change like any other push.
+
+It needs a one-time setup so GitHub knows to trust it. This takes about 5 minutes.
+
+### 1. Create a GitHub OAuth App
+
+1. Go to [github.com/settings/developers](https://github.com/settings/developers).
+2. Click **OAuth Apps** → **New OAuth App**.
+3. Fill in:
+   - **Application name:** `GoodLife Admin` (or anything you like)
+   - **Homepage URL:** your live site URL, e.g. `https://goodlifehq.vercel.app`
+   - **Authorization callback URL:** your live site URL plus `/api/callback`, e.g. `https://goodlifehq.vercel.app/api/callback`
+4. Click **Register application**.
+5. Click **Generate a new client secret**, and copy both the **Client ID** and the **Client Secret** somewhere safe. You won't be able to see the secret again after leaving this page.
+
+### 2. Add the credentials to Vercel
+
+1. In your Vercel project, go to **Settings → Environment Variables**.
+2. Add:
+   - `GITHUB_OAUTH_CLIENT_ID` → the Client ID from step 1
+   - `GITHUB_OAUTH_CLIENT_SECRET` → the Client Secret from step 1
+3. Redeploy (Deployments tab → ⋯ on latest → Redeploy) so the new variables take effect.
+
+### 3. Update the config to match your domain
+
+Open `public/admin/config.yml` and check the `base_url` line matches your actual live domain exactly, including `https://`:
+
+```yaml
+base_url: https://goodlifehq.vercel.app
+```
+
+If your domain changes later (e.g. you add a custom domain), update this line and also update the OAuth App's Homepage URL and Authorization callback URL on GitHub to match, then redeploy.
+
+### 4. Log in
+
+Go to `yoursite.vercel.app/admin`, click **Login with GitHub**, approve access when GitHub asks, and you're in. You'll see all 6 starter posts listed, ready to edit, plus a button to create new ones.
+
+**Note:** authentication only works on your live, deployed site, not when running `npm run dev` locally, since GitHub needs a real public callback URL to redirect to.
+
 ## Deploying to Vercel
 
 1. Push this repository to GitHub.
