@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fdfbf7;
+  color: #2f2c26;
+}
+
+.font-serif {
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+/* Soft focus rings instead of harsh browser default */
+:focus-visible {
+  outline: 2px solid #c67857;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Hide default scrollbar arrows on number inputs etc. not really needed here, kept minimal */
+
+.prose img {
+  border-radius: 0.75rem;
+}
+
+.prose h2 {
+  margin-top: 2.5em;
+}
+
+.prose h3 {
+  margin-top: 1.75em;
+}
